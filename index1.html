@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+</head>
+
+<body>
+
+    <header class="title">
+        <h3>Todo Lista</h3>
+    </header>
+    <main>
+        <section>
+            <h4 id="subtittle">Nueva Tareas</h4>
+            <input id="ingresartarea">
+            <button id="btnagregar">Agregar</button>
+            <h5> Id Tareas: </h5>
+            <ul id="listarea">
+            </ul>
+        </section>
+
+        <section>
+            <p id="resulTotal">Total
+                <span></span>
+            </p>
+        </section>
+    </main>
+
+</body>
+<script>
+    tareainput = document.querySelector("#ingresartarea");
+    btntarea = document.querySelector("#btnagregar");
+    ultarea = document.querySelector("#listarea");
+    tareainput = document.querySelector("#ingresartarea");
+    btntarea = document.querySelector("#btnagregar");
+    ultarea = document.querySelector("#listarea");
+    subtitulo = document.querySelector("#subtittle")
+    subtitulo.style.marginTop = "1rem";
+    subtitulo.style.marginLeft = "2rem";
+    tareainput.style.width = "25rem";
+    tareainput.style.marginLeft = "2rem";
+    tareainput.style.marginTop = "1.5rem"
+    tareainput.style.width = "25rem";
+    tareainput.style.height = "2rem";
+    btntarea.style.width = "5rem";
+    btntarea.style.height = "2.3rem";
+    btntarea.style.backgroundColor = "green";
+    btntarea.style.color = "white";
+    btntarea.style.fontSize = "1.1rem";
+    btntarea.style.borderRadius = "5%";
+    resultado = document.querySelector("#resulTotal");
+    resultado.style.marginTop = "5.5rem"
+    const tareas = [];
+    let contador = 1;
+
+
+
+    btntarea.addEventListener("click", () => {
+        const tareaDescripcion = tareainput.value.trim();
+
+        if (tareaDescripcion === "") {
+            alert("Por favor, ingresa una tarea válida.");
+
+        } else {
+
+            const nuevoTarea = { id: contador++, descripcion: tareainput.value, completada: false }
+            tareas.push(nuevoTarea)
+            tareainput.value = ""
+            contarTareas();
+            let html = ""
+            for (listarea of tareas) {
+                html += `<li> <button onclick="borrar(${listarea.id})"> X </button> <input type="checkbox" id="${listarea.id}" ${listarea.completada ? 'checked' : ''}>  ${listarea.id} ${listarea.descripcion}</li>`;
+            }
+            ultarea.innerHTML = html;
+        }
+        
+        });
+
+    function borrar(id) {
+        const index = tareas.findIndex((ele) => ele.id == id)
+        tareas.splice(index, 1)
+        let html = ""
+        for (listarea of tareas) {
+            html += `<li> <button onclick="borrar(${listarea.id})"> X </button> <input type="checkbox" id="${listarea.id}" ${listarea.completada ? 'checked' : ''}> ${listarea.id} ${listarea.descripcion}</li>`;
+        }
+        ultarea.innerHTML = html;
+    }
+
+    function contarTareas() {
+        let html = "";
+        const resultado = document.querySelector("#resulTotal");;
+        for (listarea of tareas) {
+            html += `<li> <button onclick="borrar(${listarea.id})"> X </button> <input type="checkbox" id="${listarea.id}" ${listarea.completada ? 'checked' : ''}> ${listarea.descripcion}</li>`;
+        }
+        ultarea.innerHTML = html;
+        resultado.innerHTML = `Total Tareas: ${tareas.length}`;
+    }
+
+
+
+</script>
+
+</html>

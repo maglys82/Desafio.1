@@ -1,0 +1,17 @@
+tareainput = document.querySelector("#ingresartarea");
+btntarea = document.querySelector("#btnagregar");
+ultarea = document.querySelector("#listarea");
+subtitulo = document.querySelector("#subtittle")
+subtitulo.style.marginTop = "1rem";
+subtitulo.style.marginLeft = "2rem";
+tareainput.style.width = "25rem";
+tareainput.style.marginLeft = "2rem";
+tareainput.style.marginTop = "1.5rem"
+tareainput.style.width = "25rem";
+tareainput.style.height = "2rem";
+btntarea.style.width = "5rem";
+btntarea.style.height = "2.3rem";
+btntarea.style.backgroundColor = "green";
+btntarea.style.color = "white";
+btntarea.style.fontSize = "1.1rem";
+btntarea.style.borderRadius = "5%";
