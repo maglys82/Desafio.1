@@ -29,6 +29,11 @@
                 <span></span>
             </p>
         </section>
+        <section>
+            <p id="tareasRealizada">Tareas Realizadas:
+                <span></span>
+            </p>
+        </section>
     </main>
 
 </body>
@@ -54,7 +59,8 @@
     btntarea.style.fontSize = "1.1rem";
     btntarea.style.borderRadius = "5%";
     resultado = document.querySelector("#resulTotal");
-    resultado.style.marginTop = "5.5rem"
+    resultado.style.marginTop = "5.5rem";
+    totaltareasRealizadas = document.querySelector("#tareasRealizada");
     const tareas = [
         { id: 1, descripcion: "Compras de Super Mercado", completada: false },
         { id: 2, descripcion: "Llevar a sami al Pediatra", completada: false },
@@ -64,8 +70,10 @@
 
     ];
     let contador = 6;
+    let sumarTareaRaalizadas = 0;
     contarTareas()
     pintar();
+
     btntarea.addEventListener("click", () => {
         const tareaDescripcion = tareaInput.value.trim();
 
@@ -83,19 +91,35 @@
     });
 
 
-    function pintar(){
+    function pintar() {
         let html = ""
-            for (listarea of tareas) {
-                html += `<li> <button onclick="borrar(${listarea.id})"> X </button> <input type="checkbox" id="${listarea.id}" ${listarea.completada ? 'checked' : ''}> ${listarea.id} ${listarea.descripcion}</li>`;
-
-            }
-            ultarea.innerHTML = html;
+        for (listarea of tareas) {
+            html += `<li> <button onclick="borrar(${listarea.id})"> X </button> <input type="checkbox" onclick='handleClick(this,${listarea.id})' id="${listarea.id}" ${listarea.completada ? 'checked' : ''}> ${listarea.id} ${listarea.descripcion}</li>`;
+        }
+        ultarea.innerHTML = html;
     }
+
+    function handleClick(cb,id) {
+        const totaltareasRealizadas = document.querySelector("#tareasRealizada");
+        const index = tareas.findIndex((ele) => ele.id == id)
+        if (cb.checked) {
+            
+            tareas[index].completada = true;
+            sumarTareaRaalizadas++;
+        }
+        else {
+            
+            tareas[index].completada = false;
+            sumarTareaRaalizadas--;
+        }
+        totaltareasRealizadas.innerHTML = `Tareas Realizadas: ${sumarTareaRaalizadas}`;
+    }
+
 
     function borrar(id) {
         const index = tareas.findIndex((ele) => ele.id == id)
         tareas.splice(index, 1);
-        pintar ();
+        pintar();
         contarTareas();
     }
 
